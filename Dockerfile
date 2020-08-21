@@ -8,10 +8,16 @@ ENV HOME /home/$USER
 # Create new user for vnc login.
 RUN adduser $USER --disabled-password
 
+# Spanish language
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales
+RUN sed -i -e 's/# es_ES.UTF-8 UTF-8/es_ES.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=es_ES.UTF-8
+ENV LANG es_ES.UTF-8
+
 # Install Ubuntu Unity.
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        ubuntu-desktop \
+    && apt-get install -y ubuntu-desktop \
         unity-lens-applications \
         gnome-panel \
         metacity \
