@@ -17,7 +17,8 @@ ENV LANG es_ES.UTF-8
 
 # Install Ubuntu Unity.
 RUN apt-get update \
-    && apt-get install -y ubuntu-desktop \
+    && apt-get install -y --no-install-recommends \
+		ubuntu-desktop \
         unity-lens-applications \
         gnome-panel \
         metacity \
